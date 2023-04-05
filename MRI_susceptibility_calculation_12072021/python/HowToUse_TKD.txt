@@ -1,0 +1,17 @@
+
+>py TKD.py <arguments>
+
+Arguments:
+field - The .nii file containing the field map (in ppm) 
+output - The .nii file where the susceptibility map is to be saved (in ppm)
+
+Optional arguments:
+mask - The .nii file containing the binary tissue mask (default = 1)
+resolution - Image space resolution (default = 1,1,1)
+B0direction - B0 direction (default = 0,0,1)
+threshold - k-space truncation threshold (default = 2/3)
+
+
+Example:
+
+>py TKD.py field Field.nii mask Mask.nii output TKDsusc.nii resolution 1,1,1 B0direction 0,0,1 threshold 2/3

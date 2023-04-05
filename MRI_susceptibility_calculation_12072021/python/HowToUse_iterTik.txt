@@ -1,0 +1,32 @@
+
+>py iterTik.py <arguments>
+
+Arguments:
+field - The .nii file containing the field map (in ppm) 
+mask - The .nii file containing the binary tissue mask
+noise - The .nii file containing the noise map (up to a scaling factor)
+output - The .nii file where the susceptibility map is to be saved (in ppm)
+
+--- About the noise map ---
+% The iterative fitting is weighted by the inverse of "noise" to assign lower 
+% weights to less reliable (noisy) voxels. 
+% For multi-echo data:
+% Similarly to the MEDI method, this could be e.g. the dp1 output of the 
+% Fit_ppm_complex (or Fit_ppm_complex_TE) function from the MEDI toolbox. 
+% dp1 is actually equivalent to eq. 14 from Kressler et al. IEEE TMI 29.2
+% (2009) and can be calculated using the multi-echo magnitude images.
+% For single-echo data:
+% The inverse of the magnitude image can be used as the noise map input as
+% voxels with noisy phase also tend to have low magnitude.
+--- ---
+
+Optional arguments:
+resolution - Image space resolution (default = 1,1,1)
+B0direction - B0 direction (default = 0,0,1)
+alpha - Regularisation parameter (default = 0.05)
+stopping - Iteration stopping threshold (norm(res)/norm(b)) (default = 0.03 = 3%)
+
+
+Example:
+
+>py iterTik.py field Field.nii mask Mask.nii noise Noise.nii output dirTiksusc.nii resolution 1,1,1 B0direction 0,0,1 alpha 0.05 stopping 0.03
